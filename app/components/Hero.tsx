@@ -92,7 +92,7 @@ export default function Hero() {
       >
         <motion.h1 
           variants={itemVariants}
-          className={`${typography.h1} mb-6`}
+          className={`${typography.h1} mb-6 text-4xl md:text-5xl lg:text-6xl px-4 md:px-0`}
         >
           Fidélisez <span className="text-orange-500">vos clients</span> avec{" "}
           <span className="relative">
@@ -108,7 +108,7 @@ export default function Hero() {
         
         <motion.p 
           variants={itemVariants}
-          className={`${typography.body} mb-8 max-w-2xl mx-auto text-gray-600`}
+          className={`${typography.body} mb-8 max-w-2xl mx-auto text-gray-600 px-4 md:px-0 text-base md:text-lg`}
         >
           La solution <span className="text-orange-500 font-semibold">complète</span> pour créer et gérer votre programme de fidélité. 
           Augmentez vos ventes et fidélisez votre clientèle avec notre plateforme intuitive.
@@ -116,7 +116,98 @@ export default function Hero() {
 
         <motion.div 
           variants={itemVariants}
-          className="flex justify-center gap-4"
+          className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto px-4 md:px-0"
+        >
+          {/* Version Mobile : Style inspiré de Revolut */}
+          <div className="md:hidden">
+            <motion.div 
+              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            >
+              <div className="grid grid-cols-3 divide-x divide-gray-100">
+                <motion.div 
+                  whileTap={{ scale: 0.98 }}
+                  className="p-6 text-center space-y-1"
+                >
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text">10k+</h3>
+                  <p className="text-xs text-gray-600">Clients satisfaits</p>
+                </motion.div>
+                <motion.div 
+                  whileTap={{ scale: 0.98 }}
+                  className="p-6 text-center space-y-1"
+                >
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text">95%</h3>
+                  <p className="text-xs text-gray-600">Rétention</p>
+                </motion.div>
+                <motion.div 
+                  whileTap={{ scale: 0.98 }}
+                  className="p-6 text-center space-y-1"
+                >
+                  <h3 className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text">24/7</h3>
+                  <p className="text-xs text-gray-600">Support</p>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Version Desktop : Style actuel */}
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="hidden md:block text-center p-6 rounded-xl bg-white shadow-lg shadow-orange-100/50"
+          >
+            <h3 className={`${typography.h2} text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text`}>10k+</h3>
+            <p className={`${typography.caption} text-gray-600`}>Clients satisfaits</p>
+          </motion.div>
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="hidden md:block text-center p-6 rounded-xl bg-white shadow-lg shadow-orange-100/50"
+          >
+            <h3 className={`${typography.h2} text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text`}>95%</h3>
+            <p className={`${typography.caption} text-gray-600`}>Taux de rétention</p>
+          </motion.div>
+          <motion.div 
+            whileHover={{ y: -5 }}
+            className="hidden md:block text-center p-6 rounded-xl bg-white shadow-lg shadow-orange-100/50"
+          >
+            <h3 className={`${typography.h2} text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text`}>24/7</h3>
+            <p className={`${typography.caption} text-gray-600`}>Support client</p>
+          </motion.div>
+        </motion.div>
+
+        {/* Boutons version mobile inspirés d'Uber Eats */}
+        <motion.div 
+          variants={itemVariants}
+          className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-md border-t border-gray-100 z-50"
+        >
+          <div className="flex gap-3">
+            <motion.button
+              whileTap={{ scale: 0.98 }}
+              className={`${gradients.primary} flex-1 py-4 rounded-xl text-white font-semibold shadow-lg shadow-orange-500/20`}
+            >
+              Commencer maintenant
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.98 }}
+              className="w-14 h-14 flex items-center justify-center rounded-xl bg-white border border-gray-200"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="text-gray-600"
+              >
+                <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+              </svg>
+            </motion.button>
+          </div>
+        </motion.div>
+
+        {/* Boutons version desktop */}
+        <motion.div 
+          variants={itemVariants}
+          className="hidden md:flex justify-center gap-4 px-4 md:px-0 mt-8"
         >
           <motion.button
             whileHover={{ scale: 1.02, boxShadow: "0 10px 20px -10px rgba(234, 88, 12, 0.3)" }}
@@ -132,33 +223,6 @@ export default function Hero() {
           >
             En savoir plus
           </motion.button>
-        </motion.div>
-
-        <motion.div 
-          variants={itemVariants}
-          className="mt-16 grid grid-cols-3 gap-8 max-w-3xl mx-auto"
-        >
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="text-center p-6 rounded-xl bg-white shadow-lg shadow-orange-100/50"
-          >
-            <h3 className={`${typography.h2} text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text`}>10k+</h3>
-            <p className={`${typography.caption} text-gray-600`}>Clients satisfaits</p>
-          </motion.div>
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="text-center p-6 rounded-xl bg-white shadow-lg shadow-orange-100/50"
-          >
-            <h3 className={`${typography.h2} text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text`}>95%</h3>
-            <p className={`${typography.caption} text-gray-600`}>Taux de rétention</p>
-          </motion.div>
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="text-center p-6 rounded-xl bg-white shadow-lg shadow-orange-100/50"
-          >
-            <h3 className={`${typography.h2} text-4xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 text-transparent bg-clip-text`}>24/7</h3>
-            <p className={`${typography.caption} text-gray-600`}>Support client</p>
-          </motion.div>
         </motion.div>
       </motion.div>
 

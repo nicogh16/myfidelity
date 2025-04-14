@@ -3,7 +3,15 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bars3Icon, XMarkIcon, ShoppingCartIcon, BellIcon } from '@heroicons/react/24/outline';
+import { 
+  HomeIcon,
+  QrCodeIcon,
+  UserCircleIcon,
+  GiftIcon,
+  Bars3Icon,
+  XMarkIcon
+} from '@heroicons/react/24/outline';
+import { gradients } from '../styles/design-system';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,108 +26,115 @@ const Navigation = () => {
   }, []);
 
   const menuItems = [
-    { name: 'Solution', href: '#solution' },
-    { name: 'Avantages', href: '#avantages' },
-    { name: 'Partenaires', href: '#partenaires' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Accueil', href: '/', icon: HomeIcon },
+    { name: 'Scanner', href: '#scan', icon: QrCodeIcon },
+    { name: 'Récompenses', href: '#rewards', icon: GiftIcon },
+    { name: 'Profil', href: '#profile', icon: UserCircleIcon },
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white/90 backdrop-blur-md shadow-soft' : 'bg-transparent'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
-              MyFidelity
-            </span>
-          </Link>
+    <>
+      {/* Navigation Desktop */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 hidden md:block ${
+        scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <Link href="/" className="flex items-center space-x-2">
+              <span className="text-2xl font-bold text-gray-900">
+                MyFidelity
+              </span>
+            </Link>
 
-          {/* Desktop menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-dark hover:text-primary transition-colors"
-              >
-                {item.name}
+            <div className="hidden md:flex items-center space-x-8">
+              <Link href="#features" className="text-gray-600 hover:text-gray-900">
+                Fonctionnalités
               </Link>
-            ))}
-            
-            {/* Points et notifications */}
-            <div className="flex items-center space-x-4 ml-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center bg-primary/10 px-4 py-2 rounded-full"
+              <Link href="#pricing" className="text-gray-600 hover:text-gray-900">
+                Tarifs
+              </Link>
+              <Link href="#contact" className="text-gray-600 hover:text-gray-900">
+                Contact
+              </Link>
+              <Link
+                href="#start"
+                className={`${gradients.primary} px-4 py-2 rounded-lg text-white hover:shadow-lg transition-shadow`}
               >
-                <ShoppingCartIcon className="h-5 w-5 text-primary mr-2" />
-                <span className="font-medium text-primary">0 PTS</span>
-              </motion.div>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="relative p-2 rounded-full hover:bg-gray-100 transition-colors"
-              >
-                <BellIcon className="h-6 w-6 text-dark" />
-                <span className="absolute top-0 right-0 h-2 w-2 bg-secondary rounded-full"></span>
-              </motion.button>
+                Commencer
+              </Link>
             </div>
           </div>
-
-          {/* Mobile menu button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            {isOpen ? (
-              <XMarkIcon className="h-6 w-6 text-dark" />
-            ) : (
-              <Bars3Icon className="h-6 w-6 text-dark" />
-            )}
-          </motion.button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile menu */}
+      {/* Navigation Mobile (style Instagram/Uber) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 pb-safe">
+        <div className="grid grid-cols-4 h-16">
+          {menuItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="flex flex-col items-center justify-center space-y-1"
+            >
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+                className="relative"
+              >
+                <item.icon className="w-6 h-6 text-gray-600" />
+                {item.name === 'Récompenses' && (
+                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full" />
+                )}
+              </motion.div>
+              <span className="text-xs text-gray-600">{item.name}</span>
+            </Link>
+          ))}
+        </div>
+      </nav>
+
+      {/* Menu Mobile Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 z-50 md:hidden"
+            onClick={() => setIsOpen(false)}
           >
-            <div className="px-4 pt-2 pb-3 space-y-1">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 rounded-lg text-dark hover:bg-primary/10 hover:text-primary transition-colors"
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30 }}
+              className="absolute right-0 top-0 bottom-0 w-3/4 bg-white"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="p-4">
+                <button
                   onClick={() => setIsOpen(false)}
+                  className="p-2 rounded-lg hover:bg-gray-100 mb-4"
                 >
-                  {item.name}
-                </Link>
-              ))}
-              
-              <div className="flex items-center justify-between px-3 py-2">
-                <div className="flex items-center bg-primary/10 px-4 py-2 rounded-full">
-                  <ShoppingCartIcon className="h-5 w-5 text-primary mr-2" />
-                  <span className="font-medium text-primary">0 PTS</span>
-                </div>
-                
-                <button className="relative p-2 rounded-full hover:bg-gray-100">
-                  <BellIcon className="h-6 w-6 text-dark" />
-                  <span className="absolute top-0 right-0 h-2 w-2 bg-secondary rounded-full"></span>
+                  <XMarkIcon className="w-6 h-6" />
                 </button>
+                <div className="space-y-4">
+                  {menuItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-50"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <item.icon className="w-6 h-6 text-gray-600" />
+                      <span className="text-gray-900">{item.name}</span>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 

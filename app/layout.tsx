@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import Navigation from './components/Navigation'
 
@@ -9,8 +10,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'MyFidelity - Système de fidélité intelligent pour étudiants',
-  description: 'MyFidelity est une solution de fidélisation innovante et écologique pour les commerces étudiants. Augmentez votre fréquentation et engagez votre communauté étudiante.',
+  title: 'MyFidelity - Programme de fidélité moderne',
+  description: 'Solution complète de fidélisation client pour votre commerce',
 }
 
 export default function RootLayout({
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navigation />
         {children}
+        <Analytics />
       </body>
     </html>
   )
