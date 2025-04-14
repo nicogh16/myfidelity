@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { typography } from "../styles/design-system";
 
 const faqs = [
   {
@@ -31,7 +32,12 @@ const faqs = [
   },
 ];
 
-const FAQItem = ({ question, answer }) => {
+interface FAQItemProps {
+  question: string;
+  answer: string;
+}
+
+const FAQItem = ({ question, answer }: FAQItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -45,7 +51,7 @@ const FAQItem = ({ question, answer }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="py-6 w-full flex justify-between items-center text-left"
       >
-        <span className="text-lg font-medium text-primary">{question}</span>
+        <span className={`${typography.h3} text-primary`}>{question}</span>
         <ChevronDownIcon
           className={`w-5 h-5 text-primary transition-transform ${
             isOpen ? 'transform rotate-180' : ''
@@ -61,7 +67,7 @@ const FAQItem = ({ question, answer }) => {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="pb-6 text-primary/70">{answer}</p>
+            <p className={`${typography.body} text-primary/70`}>{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -90,7 +96,7 @@ const FAQ = () => {
 
         <div className="space-y-0">
           {faqs.map((faq) => (
-            <FAQItem key={faq.question} {...faq} />
+            <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
           ))}
         </div>
 
