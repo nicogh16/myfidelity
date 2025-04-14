@@ -1,17 +1,12 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
-import Navigation from './components/Navigation'
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  display: 'swap',
-})
+const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'MyFidelity - Programme de fidélité moderne',
-  description: 'Solution complète de fidélisation client pour votre commerce',
+export const metadata = {
+  title: 'MyFidelity - Programme de fidélité innovant',
+  description: 'MyFidelity est une solution de fidélisation innovante qui aide les entreprises à fidéliser leurs clients.',
 }
 
 export default function RootLayout({
@@ -20,9 +15,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className="scroll-smooth">
+    <html lang="fr">
       <body className={inter.className}>
-        <Navigation />
         {children}
         <Analytics />
       </body>
