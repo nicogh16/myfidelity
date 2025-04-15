@@ -28,7 +28,7 @@ const features = [
   {
     icon: CreditCardIcon,
     title: 'Paiements',
-    description: 'Payez directement depuis l'application et gagnez plus de points.'
+    description: 'Payez directement depuis l\'application et gagnez plus de points.'
   },
   {
     icon: DevicePhoneMobileIcon,
