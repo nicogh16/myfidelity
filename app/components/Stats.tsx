@@ -9,10 +9,10 @@ const stats = [
 
 export default function Stats() {
   return (
-    <div className="relative bg-white py-16 sm:py-24">
+    <div className="relative bg-white py-8 sm:py-16">
       {/* Stats Section */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <dl className="grid grid-cols-1 gap-y-16 gap-x-8 text-center lg:grid-cols-3">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <dl className="grid grid-cols-1 gap-y-8 sm:gap-y-16 gap-x-4 sm:gap-x-8 text-center lg:grid-cols-3">
           {stats.map((stat) => (
             <motion.div
               key={stat.id}
@@ -20,12 +20,12 @@ export default function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: stat.id * 0.1 }}
-              className="mx-auto flex max-w-xs flex-col gap-y-4"
+              className="mx-auto flex max-w-[280px] w-full flex-col gap-y-2 sm:gap-y-4"
             >
-              <dt className={`${typography.h1} text-orange-500 order-2 text-5xl font-bold tracking-tight`}>
+              <dt className="text-4xl sm:text-5xl font-bold tracking-tight text-orange-500 order-2">
                 {stat.value}
               </dt>
-              <dd className={`${typography.body} text-gray-600 order-3 text-base leading-7`}>
+              <dd className="text-sm sm:text-base text-gray-600 order-3 leading-relaxed px-2">
                 {stat.label}
               </dd>
             </motion.div>
@@ -34,16 +34,16 @@ export default function Stats() {
       </div>
 
       {/* Centered Arrow */}
-      <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 z-10">
+      <div className="hidden sm:block absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="bg-white rounded-full p-4 shadow-lg hover:shadow-xl transition-shadow"
+          className="bg-white rounded-full p-3 sm:p-4 shadow-lg hover:shadow-xl transition-shadow"
         >
           <svg
-            className="w-6 h-6 text-orange-500"
+            className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
